@@ -1,7 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Container } from './src/components/Container/Container';
+import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import { Container, ContainerCount, ContainerIncDec } from './src/components/Container/Container';
+import { ButtonCounterAdd, ButtonCounterLess } from './src/components/Button/Button';
+import { TextButton, TextCount } from './src/components/Text/Text';
+import { ImagemLogo } from './src/components/Image/Image';
 export default function App() {
 
   const [count, setCount] = useState(0)
@@ -22,72 +25,57 @@ export default function App() {
   }
 
   const calculoEsquisito = () => {
-    setCount(count + 2 * 5 - 5 / 8 + (count -2))
+    setCount(count + 2 * 5 - 5 / 8 + (count - 2))
   }
 
   useEffect(() => {
     console.warn(`Contador Atualizado: ${count}`)
   }, [count])
   return (
-    <View style={styles.container}>
-      <Text style={styles.textCount}> {count}</Text>
-      <View style={styles.containerCount}>
-        <TouchableOpacity style={styles.ButtonCounter} onPress={increment}>
-          <Text style={styles.textButton} >
-            Incrementar
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.ButtonCounter} onPress={decriment}>
-          <Text style={styles.textButton} >
-            Decrementar
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.ButtonCounter} onPress={mutply}>
-          <Text style={styles.textButton} >
+    <Container>
+      <ImagemLogo source={require('./src/assets/RelogioRomano-menor.png')} />
+      <TextCount> {count} </TextCount>
+      <ContainerCount>
+        <ContainerIncDec>
+          <ButtonCounterAdd onPress={increment}>
+            <TextButton>
+              Incrementar
+            </TextButton>
+          </ButtonCounterAdd>
+          <ButtonCounterLess onPress={decriment}>
+            <TextButton >
+              Decrementar
+            </TextButton>
+          </ButtonCounterLess>
+        </ContainerIncDec>
+
+        <ButtonCounterAdd onPress={mutply}>
+          <TextButton >
             Multiplicar
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.ButtonCounter} onPress={zerar}>
-          <Text style={styles.textButton}>
+          </TextButton>
+        </ButtonCounterAdd>
+        <ButtonCounterAdd onPress={zerar}>
+          <TextButton>
             Zerar
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.ButtonCounter} onPress={calculoEsquisito}>
-          <Text style={styles.textButton}>
+          </TextButton>
+        </ButtonCounterAdd>
+        <ButtonCounterAdd onPress={calculoEsquisito}>
+          <TextButton>
             ???
-          </Text>
-        </TouchableOpacity>
-      </View>
+          </TextButton>
+        </ButtonCounterAdd>
+      </ContainerCount>
       <StatusBar style="auto" />
-    </View>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  ButtonCounter: {
-    borderColor: '#9EBBF0',
-    backgroundColor: '#A1C3ED',
-    borderWidth: 2,
-    width: 'auto',
-    padding: 5,
-    margin: 10,
-    borderRadius: 10
-  },
-  containerCount:{
-    margin: 5,
-    borderColor: '#A1C3ED',
-    backgroundColor: 'white',
-    borderWidth: 2,
-    alignItems: 'center',
-    flexDirection: 'column',
-    width: '90%',
-    borderRadius: 10
-  },
-  textCount:{
+  textCount: {
     fontSize: 50,
     color: '#EBE9EE'
   },
-  textButton:{
+  textButton: {
     color: '#EBE9EE'
   }
 });
